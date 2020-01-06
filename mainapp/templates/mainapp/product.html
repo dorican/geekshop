@@ -1,0 +1,134 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}
+    {% for item in single_product %}
+        <title>{{ item.name }}</title>
+    {% endfor %}
+{% endblock %}
+
+{% block content-container %}
+    <div class="content-container_on_main">
+        {% include 'mainapp/includes/inc__wrapper_add_cart.html' %}
+        {% include 'mainapp/includes/inc__breadcrumbs.html' %}
+        <div class="product-category-container">
+            <div class="product-category-left-col">
+                <div class="right-col-form-wrapper-display">
+                    <form action="{% url 'main:search' %}" method="GET" class="product-category-left-col-form">
+                        <input type="text" placeholder="Введите слово для поиска" name="q"
+                               class="input-product-category-col-form">
+                        <button type="submit" class="button-product-category-col-form">Найти</button>
+                    </form>
+                </div>
+                <p class="text-product-category-left-col">Сортировка по категории:</p>
+                {% include 'mainapp/includes/inc__sort_category_left_col.html' %}
+            </div>
+            <div class="product-category-right-col">
+                {% for item in single_product %}
+                    <div class="card-box">
+                        <div class="image-card-box"
+                             style="background-image: url(/media/{{ item.image }}); background-position: 50%;
+                                     background-size: contain; background-repeat: no-repeat">
+                        </div>
+                        <div class="desc-card-box">
+                            <h1 class="title-desc-card-box">{{ item.name }}</h1>
+                            <div class="price-stock-inf-box">
+                                <div class="price-card-box">
+                                    <p class="amount-price">{{ item.price }} руб.</p>
+                                    <p class="regular-price"></p>
+                                    <p class="sale-price"></p>
+                                </div>
+                                <div class="product-in-stock-box">
+                                    {% if not item.to_order %}
+                                       <p class="product-in-stock">Есть в наличии</p>
+                                    {% else %}
+                                       <p class="product-out-stock">Под заказ</p>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            <form action="#" class="add-to-cart-form">
+                                <button type="submit" class="btn-add-product">-</button>
+                                <input type="text" placeholder="1" class="field-add-to-cart-form">
+                                <button type="submit" class="btn-add-product">+</button>
+                                <button type="submit" class="btn-add-to-cart">В корзину</button>
+
+                                <a href="{% url 'basket:add' item.slug %}" class="btn-add-to-cart">
+                                    В корзину
+                                </a>
+                            </form>
+                            <p class="card-desc-text">{{ item.short_desc }}
+                            </p>
+                        </div>
+                    </div>
+                    <h3 class="text-title">Описание товара</h3>
+                    <p>{{ item.description }}</p>
+                {% endfor %}
+                <h3 class="text-title-similar-goods">Похожие товары</h3>
+                <div class="similar-goods-box">
+                    {% for item in same_products %}
+                        <a href="{% url 'main:product' item.slug %}" class="category-product-card-box">
+                            <h3 class="title-product-card">{{ item.name }}</h3>
+                            {% if not item.to_order %}
+                                <p class="text-in-stock">в наличии</p>
+                            {% else %}
+                                <p class="text-out-stock">под заказ</p>
+                            {% endif %}
+                            <div style="background-image: url(/media/{{ item.image }}); background-position: 50%;
+                                    background-size: contain; background-repeat: no-repeat"
+                                 class="product-similar-card-image">
+                                {#                            <img src="{% static 'img/8b7.png' %}" alt="" class="img_product_card_image">#}
+                            </div>
+                            <p class="price-card-text">{{ item.price }} руб.</p>
+                            <div class="cart-wrapper">
+                                {% if item.to_order %}
+                                    <div class="cart-out-stock"></div>
+                                {% else %}
+                                    <div class="cart-in-stock"></div>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                    {#                    <a href="#" class="category-product-card-box">#}
+                    {#                        <h3 class="title-product-card">12Огнетушитель ОУ-200</h3>#}
+                    {#                        <p class="text-in-stock">в наличии</p>#}
+                    {#                        <p class="text-out-stock">под заказ</p>#}
+                    {#                        <div class="product-similar-card-image">#}
+                    {#                            <img src="{% static 'img/8b7.png' %}" alt="" class="img_product_card_image">#}
+                    {#                        </div>#}
+                    {#                        <p class="price-card-text">1 500 руб.</p>#}
+                    {#                        <div class="cart-wrapper">#}
+                    {#                            <div class="cart-out-stock"></div>#}
+                    {#                            <div class="cart-in-stock"></div>#}
+                    {#                        </div>#}
+                    {#                    </a>#}
+                    {#                    <a href="#" class="category-product-card-box">#}
+                    {#                        <h3 class="title-product-card">12Огнетушитель ОУ-200</h3>#}
+                    {#                        <p class="text-in-stock">в наличии</p>#}
+                    {#                        <p class="text-out-stock">под заказ</p>#}
+                    {#                        <div class="product-similar-card-image">#}
+                    {#                            <img src="{% static 'img/8b7.png' %}" alt="" class="img_product_card_image">#}
+                    {#                        </div>#}
+                    {#                        <p class="price-card-text">1 500 руб.</p>#}
+                    {#                        <div class="cart-wrapper">#}
+                    {#                            <div class="cart-out-stock"></div>#}
+                    {#                            <div class="cart-in-stock"></div>#}
+                    {#                        </div>#}
+                    {#                    </a>#}
+                    {#                    <a href="#" class="category-product-card-box">#}
+                    {#                        <h3 class="title-product-card">Огнетушитель ОУ-200</h3>#}
+                    {#                        <p class="text-in-stock">в наличии</p>#}
+                    {#                        <p class="text-out-stock">под заказ</p>#}
+                    {#                        <div class="product-similar-card-image">#}
+                    {#                            <img src="{% static 'img/8b7.png' %}" alt="" class="img_product_card_image">#}
+                    {#                        </div>#}
+                    {#                        <p class="price-card-text">1 500 руб.</p>#}
+                    {#                        <div class="cart-wrapper">#}
+                    {#                            <div class="cart-out-stock"></div>#}
+                    {#                            <div class="cart-in-stock"></div>#}
+                    {#                        </div>#}
+                    {#                    </a>#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

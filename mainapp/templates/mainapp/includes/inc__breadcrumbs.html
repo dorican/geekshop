@@ -1,0 +1,11 @@
+<div class="breadcrumbs">
+    <a href="/">РФснаб.ру</a> /
+    <a href="{% url 'main:shop' %}">Каталог</a>
+    {% for item in single_category %}/ {{ item.name }}{% endfor %}
+    {% for item in single_product %}/
+        <a href="{% url 'main:category' item.category.slug %}">
+        {{ item.category.name }}
+        </a>
+    {% endfor %}
+    {% for item in single_product %}/ {{ item.name }}{% endfor %}
+</div>

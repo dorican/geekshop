@@ -1,0 +1,19 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+{% block content-container %}
+    <div class="content-container">
+        <div class="form_wrapper">
+            <div class="login_form">
+                <h1 class="regisration_title">Редактирование профиля пользователя</h1>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ edit_form.as_p }}
+                    {{ profile_form.as_p }}
+                    <input type="submit" class="btn_auth" value="сохранить">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

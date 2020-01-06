@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% block title %}
+        <title>{{ page_title | capfirst }}</title>
+    {% endblock %}
+    {% block css %}
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {#        <link href="img/burning-ico.png" rel="shortcut icon" type="image/x-icon">#}
+        <link href="{% static 'img/burning-ico.png' %}" rel="shortcut icon" type="image/x-icon">
+        {#        <link href="{% static 'images/webclip.png' %}" rel="apple-touch-icon">#}
+    {% endblock %}
+
+</head>
+<body>
+{#<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">#}
+<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div></div>
+                <h5 class="modal-title" id="label">Обратный звонок</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'callback:index' %}" method="post" enctype="multipart/form-data">
+                    {% include "callbackapp/modal_window.html" %}
+                </form>
+            </div>
+            <div class="modal-footer">
+{#                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>#}
+                <button type="button" class="btn btn-primary" id="add-button">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="site-wrapper">
+    <div class="top">
+        <div class="header">
+            <div class="header-wrapper">
+                <div class="header-upper-section">
+                    <a href="{% url 'main:index' %}" class="logo-upper-section">
+                    </a>
+
+                    <form action="{% url 'main:search' %}" method="GET" class="search-upper-form-section">
+                        <input type="text" placeholder="Поиск по каталогу" name="q"
+                               class="input-search-upper-section">
+                        <button type="submit" class="search-upper-section-btn"></button>
+                    </form>
+                    <div class="text-wrapper-upper-section">
+                        <p class="text-upper-section">ООО «МСВ», г. Сыктывкар, ул. Гаражная, д. 9, офис 105</p>
+                        <a href="#" class="header-phone">+7(8212)29-69-71</a>
+                        <div class="callback-box">
+                            <a href="#" class="header-phone-left">8-800-511-80-60</a>
+                            <a href="#" class="callback-link js-button-campaign" data-toggle="modal"
+                               data-target="#modal">обратный звонок</a>
+
+                        </div>
+                        <p class="footer-text"> Сегодня {% now "DATE_FORMAT" %}</p>
+                    </div>
+                </div>
+
+                {% include 'mainapp/includes/inc__menu_wrapper.html' %}
+            </div>
+        </div>
+
+
+
+
+        {% block content-container %}
+        {% endblock %}
+    </div>
+    <div class="footer">
+        <div class="footer-wrapper">
+            <div class="footer-box">
+                <div class="footer-col">
+                    <img src="{% static 'img/visa_logos.png' %}" alt="VISA, MASTERCARD">
+                    <p class="footer-text">ИНН 1101059443</p>
+                    <p class="footer-text">ОГРН 1161101055620</p>
+                </div>
+                <div class="footer-col">
+                    <p class="fotter-title">Меню</p>
+                    <ul class="menu-footer">
+                        <li><a href="#" class="footer-menu-link">Главная</a></li>
+                        <li><a href="#" class="footer-menu-link">О компании</a></li>
+                        <li><a href="#" class="footer-menu-link">Доставка</a></li>
+                        <li><a href="#" class="footer-menu-link">Новости</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <p class="fotter-title">Услуги</p>
+                    <ul class="menu-footer">
+                        <li><a href="#" class="footer-menu-link">Каталог всех товаров</a></li>
+                        <li><a href="#" class="footer-menu-link">Противопожарное оборудование</a></li>
+                        <li><a href="#" class="footer-menu-link">Продукция торговой малки Шанс</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <p class="fotter-title">Контакты</p>
+                    <p class="footer-text"><a href="tel:+78212296971" class="footer-phone">+7(8212)29-69-71</a></p>
+                    <p class="footer-text">Режим работы: пн-пт с 9.00 до 18.00, обед с 13.00 до 14.00</p>
+                    <ul class="menu-footer">
+                        <li><a href="#" class="footer-menu-link">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="copyright-text">&copy; 2019, ООО «МСВ»</p>
+        </div>
+    </div>
+</div>
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+{#    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"#}
+{#            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>#}
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"#}
+{#            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"#}
+{#            crossorigin="anonymous"></script>#}
+{#    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"#}
+{#            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>#}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+
+
+
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/basket_scripts.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/orders_scripts.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+
+{% endblock %}
+
+</body>
+</html>

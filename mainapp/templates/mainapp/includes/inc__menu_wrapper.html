@@ -1,0 +1,82 @@
+<div class="menu-wrapper">
+    <ul class="left-menu">
+        <li><a href="{% url 'main:index' %}" class="menu-link-left">Главная</a></li>
+        <li><a href="#" class="menu-link-left">О компании</a></li>
+        <li><a href="{% url 'main:shop' %}" class="menu-link-left">Каталог</a></li>
+        <li><a href="#" class="menu-link-left">Доставка</a></li>
+        <li><a href="{% url 'news:index' %}" class="menu-link-left">Новости</a></li>
+
+    </ul>
+    <ul class="right-menu">
+    {% if user.is_authenticated %}
+        <li>
+        <p class="welcome_text">Доброго времени суток, </p>
+        </li>
+        <li>
+            <div class="dropdown">
+  <button class="btn btn-dropdown-link dropdown-toggle" type="button"
+          id="dropdownMenuButton" data-toggle="dropdown">
+    <p class="welcome_text">{{ user.first_name|default:'Пользователь' }} </p>
+
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a href="{% url 'auth:update' %}" class="dropdown-item">
+                    Профиль
+                </a>
+    <a class="dropdown-item" href="{% url 'order:orders_list' %}">Заказы</a>
+
+  </div>
+</div>
+    </li>
+     {% endif %}
+
+{#    <li>#}
+{#        <p class="welcome_text">Доброго времени суток, </p>#}
+{#        </li>#}
+{#        <li>#}
+{#    <div class="dropdown">#}
+{#  <button class="btn btn-dropdown-link dropdown-toggle" type="button"#}
+{#          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#    <p class="welcome_text">{{ user.first_name|default:'Пользователь' }} </p>#}
+{##}
+{#  </button>#}
+{#  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
+{#    <a href="{% url 'auth:update' %}" class="dropdown-item">#}
+{#                    Профиль#}
+{#                </a>#}
+{#    <a class="dropdown-item" href="{% url 'order:orders_list' %}">Заказы</a>#}
+{##}
+{#  </div>#}
+{#</div>#}
+{#    </li>#}
+
+
+
+
+
+{#        <li>#}
+{#            {% if user.is_authenticated %}#}
+{#                <p class="welcome_text">Доброго времени суток, </p>#}
+{#                <a href="{% url 'auth:update' %}" class="update_link">#}
+{#                    {{ user.first_name|default:'Пользователь' }}#}
+{#                </a>#}
+{#            {% endif %}#}
+{#        </li>#}
+        <li>
+            {% if user.is_superuser %}
+                <a href="{% url 'myadmin:index' %}" class="menu-link-right">
+                    Админка
+                </a>
+            {% endif %}
+        </li>
+        <li>
+            {% if user.is_authenticated %}
+                <a href="{% url 'auth:logout' %}" class="menu-link-right">Выход</a>
+            {% else %}
+                <a href="{% url 'auth:login' %}" class="menu-link-right">Личный кабинет</a>
+            {% endif %}
+        </li>
+        {#        <li><a href="#" class="menu-link-right">Личный кабинет </a></li>#}
+        <li><a href="{% url 'basket:index' %}" class="menu-link-right">Корзина</a></li>
+    </ul>
+</div>

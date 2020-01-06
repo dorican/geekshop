@@ -1,0 +1,51 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content-container %}
+
+    <div class="content-container">
+
+        <div class="form_wrapper">
+            <h1 class="regisration_title_lk">Личный кабинет</h1>
+            <div class="social_icon_box">
+                        <p class="social_title">Войти с помощью:</p>
+<a href="{% url 'social:begin' 'vk-oauth2' %}?next=/" class="auth_icon"></a></div>
+            <form method="post">
+                {% csrf_token %}
+                {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                {% endif %}
+                {{ form.as_p }}
+                <input type="submit" value="войти" class="btn_auth">
+            </form>
+            <a href="{% url 'auth:register' %}" class="auth_register">Зарегистрироваться</a>
+
+            {#        <a href="#" class="auth_title">Личный кабинет</a>#}
+            {#        <div class="login_form">#}
+            {#            <form action="">#}
+            {#                <label class="field-label-registration">Логин</label>#}
+            {##}
+            {#                <input type="text" class="field_label_input" required=""/>#}
+            {##}
+            {#                <label class="field-label-registration">Пароль</label>#}
+            {##}
+            {#                <input type="password" class="field_label_input" required=""/>#}
+            {##}
+            {#                <button type="submit" class="btn_auth">Войти</button>#}
+            {#            </form>#}
+            {#        </div>#}
+            {#    </div>#}
+            {#    <div class="form_wrapper">#}
+            {#        <a href="#" class="auth_title">Регистрация</a>#}
+            {#        <div class="login_form">#}
+            {#            <form action="">#}
+            {#                <label class="field-label-registration">Email</label>#}
+            {##}
+            {#                <input type="email" class="field_label_input" required=""/>#}
+            {##}
+            {#                <button type="submit" class="btn_auth">Зарегистрироваться</button>#}
+            {#            </form>#}
+            {#        </div>#}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'mainapp/base.html' %} }
+{% load static %}
+
+{% block content-container %}
+    <div class="content-container_on_main">
+        {% include 'mainapp/includes/inc__wrapper_add_cart.html' %}
+        {% include 'mainapp/includes/inc__breadcrumbs.html' %}
+        <form action="#" class="product-category-right-col-form">
+            <button type="submit" class="button-product-category-col-form-upper">Найти</button>
+            <div class="product-category-slider-box-upper">
+                <div class="product-category-price-slider">
+                    <div class="ui-slider-range"></div>
+                    <div class="ui-slider-handle"></div>
+                </div>
+            </div>
+            <input type="text" placeholder="0" class="input-category-form-upper">
+            <input type="text" placeholder="15000" class="input-category-form-upper">
+        </form>
+        <div class="product-category-container">
+            <div class="product-category-left-col">
+{#                <div class="right-col-form-wrapper">#}
+{#                    <form action="#" class="product-category-left-col-form">#}
+{#                        <input type="text" placeholder="Введите слово для поиска"#}
+{#                               class="input-product-category-col-form">#}
+{#                        <button type="submit" class="button-product-category-col-form">Най123ти</button>#}
+{#                    </form>#}
+{#                </div>#}
+                <p class="text-product-category-left-col">Сортировка по категории:</p>
+                {% include 'mainapp/includes/inc__sort_category_left_col.html' %}
+            </div>
+            <div class="product-category-right-col">
+                <div class="right-col-form-wrapper">
+                    <form action="#" class="product-category-right-col-form">
+                        <div class="product-category-slider-box">
+                            <div class="product-category-price-slider">
+                                <div class="ui-slider-range"></div>
+                                <div class="ui-slider-handle"></div>
+                            </div>
+                        </div>
+                        <input type="text" placeholder="0" class="input-category-col-right-form">
+                        <input type="text" placeholder="15000" class="input-category-col-right-form">
+                    </form>
+                </div>
+                <div class="category-product-box">
+                    {% if all_products %}
+                        {% for item in all_products %}
+                            <a href="{% url 'main:product' item.slug %}" class="category-product-card-box">
+                                <h3 class="title-product-card">{{ item.name }}</h3>
+                                {% if not item.to_order %}
+                                    <p class="text-in-stock">в наличии</p>
+                                {% else %}
+                                    <p class="text-out-stock">под заказ</p>
+                                {% endif %}
+                                <div style="background-image: url(/media/{{ item.image }}); background-position: 50%;
+                                        background-size: contain; background-repeat: no-repeat"
+                                     class="product-card-image-box">
+                                    {#<img src="/media/{{ item.image }}" alt="" class="img_product_card_image">#}
+                                </div>
+                                <p class="price-card-text">{{ item.price }} руб.</p>
+                                <div class="cart-wrapper">
+                                    {% if item.to_order %}
+                                        <div class="cart-out-stock"></div>
+                                    {% else %}
+                                        <div class="cart-in-stock"></div>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <div style="margin: 50px auto;">
+                            <p style="font-size: 32px;">В данный момент товара нет</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="pagination-box">
+                    {% if all_products.has_previous %}
+                        <a href="{% url 'main:shop_paginator' all_products.previous_page_number %}"
+                           class="previouspostslink">«</a>
+                    {% endif %}
+
+                    <p class="pagination">Страница {{ all_products.number }} из {{ all_products.paginator.num_pages }}
+
+                        {#                    <a href="#" class="pagination-page">1</a>#}
+                        {#                    <a href="#" class="current-page">2</a>#}
+                        {#                    ...#}
+                        {#                    <a href="#" class="pagination-page">3</a>#}
+                        {#                    <a href="#" class="pagination-page">4</a>#}
+                        {% if all_products.has_next %}
+                            <a href="{% url 'main:shop_paginator' all_products.next_page_number %}"
+                               class="nextpostslink">»</a></p>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

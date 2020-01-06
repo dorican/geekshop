@@ -1,0 +1,28 @@
+{% extends 'mainapp/base.html' %} }
+{% load static %}
+{% block title %}
+    {% for item in new_detail %}
+        <title>{{ item.title }}</title>
+    {% endfor %}
+{% endblock %}
+
+{% block content-container %}
+    <div class="content-container_on_main">
+        <div class="news_wrapper">
+            <div class="container-fluid">
+                <div class="row cat-box-post">
+                    <div class="col-9 new_padding">
+                        {% for item in new_detail %}
+                            <h2 class="text-title">{{ item.title }}</h2>
+                            <div style="background-image: url(/media/{{ item.image }}); background-position: 50%;
+                                    background-size: cover; background-repeat: no-repeat"
+                                 class="news_image_box_in_new"></div>
+                            <p>{{ item.content | safe }}</p>
+                        {% endfor %}
+                    <a href="{% url 'news:index' %}" class="readmore_link in_new_article">Вернуться назад</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

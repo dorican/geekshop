@@ -1,0 +1,108 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block content-container %}
+    <div class="content-container">
+        <h2 class="myadmin-title">Панель администратора</h2>
+        {% include 'adminapp/includes/inc__myadmin-menu.html' %}
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Аватар</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Ник</th>
+                <th scope="col">Возраст</th>
+                <th scope="col">Email</th>
+                <th scope="col">Был</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td>
+                        <a href="{% url 'myadmin:shopuser_create' %}" class="btn btn-dark">Новый пользователь</a>
+                        </td>
+                    <td>
+                    </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+            {% for item in object_list %}
+                <tr class="{% if not item.is_active %}not_active{% endif %}">
+                    <th scope="row">{{ item.id }}</th>
+                    <td><img src="{{ item.avatar|media_folder_users }}"
+                                              alt="" class="user_avatar"></td>
+                    <td>{% if item.is_superuser %}администратор{% else %}пользователь{% endif %}<p>
+                    <a href="{% url 'myadmin:shopuser_update' item.pk %}" class="btn btn-success">Редактировать</a></p>
+                   <p> <a href="{% url 'myadmin:shopuser_delete' item.pk %}" class="btn btn-danger">Удалить</a></p>
+                    </td>
+                    <td>{{ item.username }}
+                    {% if item.first_name %}
+                            <p class="text-admin">{{ item.first_name|title }}</p>
+                            {% if item.last_name %}
+                                <p class="text-admin">{{ item.last_name|title }}</p>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                <td><strong>{{ item.age }}</strong></td>
+                <td><strong>{{ item.email }}</strong></td>
+                <td><strong>{{ item.last_login }}</strong></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+{#        <div class="user_list_wrapper">#}
+{#            <div class="user_list first-row">#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col">#}
+{#                    <a href="{% url 'myadmin:shopuser_create' %}" class="btn-admin-2">Новый пользователь</a>#}
+{#                </div>#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col"></div>#}
+{#            </div>#}
+{#            {% for item in object_list %}#}
+{#                <div class="user_list {% if not item.is_active %}not_active{% endif %}">#}
+{#                    <div class="div-col"><img src="{{ item.avatar|media_folder_users }}"#}
+{#                                              alt="" class="user_avatar"></div>#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin">#}
+{#                            <strong>{% if item.is_superuser %}администратор{% else %}пользователь{% endif %}</strong>#}
+{#                        </p>#}
+{#                        <a href="{% url 'myadmin:shopuser_update' item.pk %}" class="btn-admin-1">Редактировать</a>#}
+{#                        <a href="{% url 'myadmin:shopuser_delete' item.pk %}" class="btn-admin-2">Удалить</a>#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin"><strong>ник:</strong></p>#}
+{#                        <p class="text-admin">{{ item.username }}</p>#}
+{#                        {% if item.first_name %}#}
+{#                            <p class="text-admin">{{ item.first_name|title }}</p>#}
+{#                            {% if item.last_name %}#}
+{#                                <p class="text-admin">{{ item.last_name|title }}</p>#}
+{#                            {% endif %}#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin"><strong>возраст:</strong></p>#}
+{#                        <p class="text-admin">{{ item.age }}</p>#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin"><strong>e-mail:</strong></p>#}
+{#                        <p class="text-admin">{{ item.email }}</p>#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin"><strong>был:</strong></p>#}
+{#                        <p class="text-admin">{{ item.last_login }}</p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+
+{% block content-container %}
+    <div class="content-container">
+    <h2 class="registration_title__myadmin">Панель администратора</h2>
+        {% include 'adminapp/includes/inc__myadmin-menu.html' %}
+        <div class="form_wrapper">
+            <div class="login_form">
+                <h1 class="regisration_title">{{ page_title | title }}</h1>
+
+                <p>Уверены, что хотите удалить
+                <strong>{{ object.username }}
+                {% if object.first_name %}
+                    ({{ object.first_name|title }}
+                    {% if object.last_name %}
+                        {{ object.last_name|title }}
+                    {% endif %})
+                {% endif %}
+                </strong>?
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-danger" value="Удалить">
+                </form>
+
+            </div>
+            <a href="{% url 'myadmin:index' %}" class="btn btn-secondary">
+                    Отмена
+                </a>
+        </div>
+    </div>
+{% endblock %}

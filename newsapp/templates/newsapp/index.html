@@ -1,0 +1,39 @@
+{% extends 'mainapp/base.html' %} }
+{% load static %}
+{% block content-container %}
+    <div class="content-container_on_main">
+        <div class="news_wrapper">
+            <div class="container-fluid">
+
+                {% if all_news %}
+
+                    {% for item in all_news %}
+
+
+                        <div class="row cat-box-posts">
+                            <div class="col-3">
+                                <a href="{% url 'news:new' item.slug %}"
+                                   style="background-image: url(/media/{{ item.image }}); background-position: 50%;
+                                           background-size: contain; background-repeat: no-repeat"
+                                   class="image_box"></a>
+
+                            </div>
+                            <div class="col-9 news_padding">
+                                <h2 class="news_title">{{ item.title }}</h2>
+                                <div class="news_info">
+                                    <p class="text-date-news">{{ item.created | date:"SHORT_DATE_FORMAT" }}</p>
+                                    <p class="text-date-news author">{{ item.author }}</p>
+                                </div>
+                                <p>{{ item.content | truncatewords:40 }}</p>
+                                <a href="{% url 'news:new' item.slug %}" class="readmore_link">Подробнее</a>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h2 class="news_title">На данный момент нет ни одной новости</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

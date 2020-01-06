@@ -1,0 +1,35 @@
+<div class="myadmin-menu-wrapper">
+{#    <ul class="myadmin-menu">#}
+{#        <li><a href="{% url 'main:index' %}" class="myadmin-menu-link">#}
+{#            На сайт</a></li>#}
+{#        <li><a href="{% url 'myadmin:index' %}"#}
+{#               class="myadmin-menu-link#}
+{#{% if request.resolver_match.url_name == 'index' %}active-myadmin-menu{% endif %}">#}
+{#            Пользователи</a></li>#}
+{#        <li><a href="{% url 'myadmin:productcategory_list' %}"#}
+{#               class="myadmin-menu-link#}
+{#{% if request.resolver_match.url_name == 'productcategory_list' %}active-myadmin-menu{% endif %}">#}
+{#            Категории</a></li>#}
+{#        <li><a href="{% url 'auth:logout' %}" class="myadmin-menu-link">Выход</a></li>#}
+{#    </ul>#}
+
+
+<ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link"
+               href="{% url 'main:index' %}">На сайт</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+               href="{% url 'myadmin:index' %}">Пользователи</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'productcategory_list' %}active{% endif %}"
+               href="{% url 'myadmin:productcategory_list' %}">Категории</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'auth:logout' %}">Выход</a>
+        </li>
+    </ul>
+
+</div>

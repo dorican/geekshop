@@ -1,0 +1,187 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content-container %}
+
+    <div class="content-container_on_main">
+        {% include 'mainapp/includes/inc__wrapper_add_cart.html' %}
+        <div class="slide-container">
+            <a href="#" class="slider-left-arrow">
+                <img src="{% static 'img/left-arrow.png' %}" alt="left arrow">
+            </a>
+            <div class="slider-content-box">
+                <div class="slider-pagination-box">
+                    <a href="#" class="slider-circle"></a>
+                    <a href="#" class="slider-circle circle-active"></a>
+                    <a href="#" class="slider-circle"></a>
+                </div>
+            </div>
+            <a href="#" class="slider-right-arrow">
+                <img src="{% static 'img/right-arrow.png' %}" alt="right arrow">
+            </a>
+        </div>
+        <h2 class="text-title">Наши акции и скидки</h2>
+
+        <div class="search-from-wrapper-on-main">
+            <form action="#" class="search-form-on-main-container">
+                <input type="text" placeholder="Поиск по каталогу" class="input-search-from-wrapper-on-main">
+                <button type="submit" class="btn-search-from-wrapper-on-main">Найти</button>
+                <div class="slider-box">
+                    <div class="price-slider">
+                        <div class="ui-slider-range"></div>
+                        <div class="ui-slider-handle"></div>
+                    </div>
+                </div>
+                <input type="text" placeholder="0" class="input-search-from-wrapper-on-main-left">
+                <input type="text" placeholder="15000" class="input-search-from-wrapper-on-main-right">
+            </form>
+        </div>
+        <div class="card-container">
+            {% if all_products %}
+                {% for item in all_products %}
+                    <a href="{% url 'main:product' item.slug %}" class="category-product-card-box">
+                        <h3 class="title-product-card">{{ item.name }}</h3>
+                        {% if not item.to_order %}
+                            <p class="text-in-stock">в наличии</p>
+                        {% else %}
+                            <p class="text-out-stock">под заказ</p>
+                        {% endif %}
+                        {#                        style="background-image: url(/media/{{ item.image }});"#}
+                        <div style="background-image: url(/media/{{ item.image }}); background-position: 50%;
+                                background-size: contain; background-repeat: no-repeat"
+                             class="product-card-image-box">
+                            {#                            <img src="/media/{{ item.image }}" alt="" class="img_product_card_image">#}
+                        </div>
+                        <p class="price-card-text">{{ item.price }} руб.</p>
+                        <div class="cart-wrapper">
+                            {% if item.to_order %}
+                                <div class="cart-out-stock"></div>
+                            {% else %}
+                                <div class="cart-in-stock"></div>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div style="margin: 50px auto;">
+                    <p style="font-size: 32px;">В данный момент товара нет</p>
+                </div>
+            {% endif %}
+
+        </div>
+        <div class="button-to-cataloge-wrapper">
+            <a href="{% url 'main:shop' %}" class="button-to-cataloge">смотреть все</a></div>
+        <h2 class="text-title">Как мы работаем</h2>
+        <div class="as-we-work-box">
+            <div class="as-we-work-card">
+                <div class="as-we-work-image"></div>
+                <div class="as-we-work-number">1</div>
+                <p class="as-we-work-description">Вы определяетесь с необходимым оборудованием</p>
+            </div>
+            <div class="as-we-work-card">
+                <div class="as-we-work-image-1"></div>
+                <div class="as-we-work-number">2</div>
+                <p class="as-we-work-description">Оформляете заявку по телефону или по e-mail</p>
+            </div>
+            <div class="as-we-work-card">
+                <div class="as-we-work-image-2"></div>
+                <div class="as-we-work-number">3</div>
+                <p class="as-we-work-description">Обмениваемся документами для заключения договора</p>
+            </div>
+            <div class="as-we-work-card">
+                <div class="as-we-work-image-3"></div>
+                <div class="as-we-work-number">4</div>
+                <p class="as-we-work-description">Вы оплачиваете счет за оборудование</p>
+            </div>
+            <div class="as-we-work-card">
+                <div class="as-we-work-image-4"></div>
+                <div class="as-we-work-number">5</div>
+                <p class="as-we-work-description">Забираете товар в офисе или получаете доставку</p>
+            </div>
+            <div class="as-we-work-card">
+                <div class="as-we-work-image-5"></div>
+                <div class="as-we-work-number">6</div>
+                <p class="as-we-work-description">Продолжаем взаимовыгодное сотрудничество</p>
+            </div>
+        </div>
+        <h2 class="text-title">Почему выбирают нас</h2>
+        <div class="why-choose-us-box">
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Широкий ассортимент оборудования</p>
+            </div>
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Приемлемые цены на весь каталог товаров</p>
+            </div>
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Гибкая система скидок постоянным клиентам</p>
+            </div>
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Самые короткие сроки поставки клиентам</p>
+            </div>
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Доставка товара по всей России</p>
+            </div>
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Консультация и помощь с выбором</p>
+            </div>
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Гарантия качества на все оборудование</p>
+            </div>
+            <div class="why-choose-us-card">
+                <img src="{% static 'img/check_img.png' %}" alt="image" class="why-choose-us-card-image">
+                <p class="why-choose-us-card-text">Качественное техническое обслуживание</p>
+            </div>
+        </div>
+        <h2 class="text-title">Новости компании</h2>
+        <div class="news-company-box">
+            {% if all_news %}
+                {% for item in all_news %}
+                <a href="{% url 'news:new' item.slug %}" class="news-company-card">
+                    <p class="title-news-company-box">{{ item.title }}</p>
+                    <div class="system-information-news-card">
+                        <p class="post-date">{{ item.created | date:"SHORT_DATE_FORMAT" }}</p>
+                        <p class="author-post">{{ item.author }}</p>
+                    </div>
+                    <div style="background-image: url(/media/{{ item.image }}); background-position: 50%;
+                                           background-size: contain; background-repeat: no-repeat"
+                         class="news-company-card-image"></div>
+                </a>
+                {% endfor %}
+            {% else %}
+                <h2 class="news_title">На данный момент нет ни одной новости</h2>
+            {% endif %}
+            {#            <a href="#" class="news-company-card">#}
+            {#                <p class="title-news-company-box">Тестовая новость 1</p>#}
+            {#                <div class="system-information-news-card">#}
+            {#                    <p class="post-date">05.06.2019</p>#}
+            {#                    <p class="author-post">admin</p>#}
+            {#                </div>#}
+            {#                <div class="news-company-card-image"></div>#}
+            {#            </a>#}
+            {#            <a href="#" class="news-company-card">#}
+            {#                <p class="title-news-company-box">Тестовая новость 1</p>#}
+            {#                <div class="system-information-news-card">#}
+            {#                    <p class="post-date">05.06.2019</p>#}
+            {#                    <p class="author-post">admin</p>#}
+            {#                </div>#}
+            {#                <div class="news-company-card-image"></div>#}
+            {#            </a>#}
+            {#            <a href="#" class="news-company-card">#}
+            {#                <p class="title-news-company-box">Тестовая новость 1</p>#}
+            {#                <div class="system-information-news-card">#}
+            {#                    <p class="post-date">05.06.2019</p>#}
+            {#                    <p class="author-post">admin</p>#}
+            {#                </div>#}
+            {#                <div class="news-company-card-image"></div>#}
+            {#            </a>#}
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+<div class="cart_wrapper__container">
+{% for item in basket %}
+        <div class="cart_wrapper">
+            <a href="{% url 'main:product' item.product.slug %}"
+               style="background-image: url(/media/{{ item.product.image }}); background-position: 50%;
+                       background-size: contain; background-repeat: no-repeat" class="cart_image">
+            </a>
+            <a href="{% url 'main:product' item.product.slug %}" class="cart_title_product">
+                {{ item.product.name }}
+            </a>
+            <form action="#" class="add-to-cart-form_cart">
+                <button type="button" class="btn-add-product-minus">-</button>
+                <input type="number" min="0" name="{{ item.pk }}"
+                       class="field-add-to-cart-form" value="{{ item.quantity }}">
+                <button type="button" class="btn-add-product-plus">+</button>
+            </form>
+            <p class="cart_price"> {{ item.product.price }} руб.</p>
+            <p class="cart_price_total"> {{ item.product_cost }} руб.</p>
+            <a href="{% url 'basket:delete' item.pk %}" class="remove_cart">x</a>
+        </div>
+
+{% endfor %}
+    {% if basket %}
+        <div class="total_cart">
+            <p class="text_cart">Итого в корзине: <b>{{ basket.0.total_quantity }} шт.</b></p>
+            <p class="text_cart">Итого на сумму: <b>{{ basket.0.total_cost|floatformat:2 }} руб.</b></p>
+            <a href="{% url 'ordersapp:order_create' %}" class="btn_cart">Оформить заказ</a>
+        </div>
+    {% else %}
+        <div class="cart_empty">
+        </div>
+        <p class="empty_cart_text">Ваша корзина пуста</p>
+        <a href="{% url 'main:shop' %}" class="btn_cart">Перейти в каталог</a>
+    {% endif %}
+</div>

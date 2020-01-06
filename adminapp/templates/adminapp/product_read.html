@@ -1,0 +1,55 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content-container %}
+    <div class="content-container">
+
+        <h2 class="registration_title__myadmin">Панель администратора</h2>
+        {% include 'adminapp/includes/inc__myadmin-menu.html' %}
+
+        <h1 class="regisration_title">{{ productcategory.name }}</h1>
+
+
+        <div class="user_list_wrapper">
+
+            <div class="user_list first-row">
+                <div class="div-col"></div>
+                <div class="div-col">
+
+                </div>
+                <div class="div-col">
+                </div>
+                <div class="div-col"></div>
+                <div class="div-col"></div>
+                <div class="div-col"></div>
+            </div>
+
+            <div class="user_list ">
+
+                <div class="div-col">
+                    <img src="/media/{{ object.image|default:'product_images/2n.jpg' }}" alt="">
+
+                </div>
+                <div class="div-col">
+                    <p class="text-admin">{{ object.name }}</p>
+                </div>
+                <div class="div-col">
+                    <p class="text-admin">{{ object.short_desc }}</p>
+                </div>
+                <div class="div-col">
+                    <p class="text-admin">{{ object.description }}</p>
+                </div>
+                <div class="div-col">
+                    <p class="text-admin">{{ object.price }}</p>
+                </div>
+                <div class="div-col">
+                    <p>{{ object.quantity }}</p>
+                </div>
+            </div>
+
+        </div>
+        <a href="{% url 'myadmin:productcategory_products' object.category.pk %}" class="btn-admin-3">
+            Назад к товарам
+        </a>
+    </div>
+{% endblock %}

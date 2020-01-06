@@ -1,0 +1,98 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content-container %}
+    <div class="content-container">
+        <h2 class="myadmin-title">Панель администратора</h2>
+        {% include 'adminapp/includes/inc__myadmin-menu.html' %}
+
+    <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название категории</th>
+                <th scope="col">Инструменты</th>
+                <th scope="col">Описание</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td>
+                        <a href="{% url 'myadmin:productcategory_create' %}" class="btn btn-dark">Новая категория</a>
+                        </td>
+                    <td>
+                    </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+            {% for item in object_list %}
+                <tr class="{% if not item.is_active %}not_active{% endif %}">
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td><a href="{% url 'myadmin:productcategory_products' item.pk %}"#}
+                           class="btn btn-primary">Товары категории</a><br>
+ <a href="{% url 'myadmin:productcategory_update' item.pk %}"
+                           class="btn btn-success">Редактировать</a><br>
+                  <a href="{% url 'myadmin:productcategory_delete' item.pk %}" class="btn btn-danger">Удалить</a>
+                    </td>
+                    <td>{{ item.description }}
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+
+{#        <div class="user_list_wrapper">#}
+{#            <div class="user_list first-row">#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col">#}
+{#                    <a href="{% url 'myadmin:productcategory_create' %}" class="btn-admin-2">Новая категория</a>#}
+{#                </div>#}
+{#                <div class="div-col">#}
+{#                </div>#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col"></div>#}
+{#            </div>#}
+{#            {% for object in object_list %}#}
+{#                <div class="user_list {% if not object.is_active %}not_active{% endif %}">#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin">{{ object.name }}</p>#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin"></p>#}
+{#                        <a href="{% url 'myadmin:productcategory_products' object.pk %}"#}
+{#                           class="btn-admin-1">Товары категории</a>#}
+{#                        <a href="{% url 'myadmin:productcategory_update' object.pk %}"#}
+{#                           class="btn-admin-1">Редактировать</a>#}
+{#                        <a href="{% url 'myadmin:productcategory_delete' object.pk %}" class="btn-admin-2">Удалить</a>#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{#                        <p class="text-admin">{{ object.description }}</p>#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{##}
+{#                    </div>#}
+{#                    <div class="div-col">#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content-container %}
+    <div class="content-container">
+        <div class="form_wrapper">
+            {% if user %}
+                <h2 class="verification_title">Поздравляем!</h2>
+                <br>
+                <p>Пользователь {{ user.username }} подтвержден.</p>
+            {% else %}
+                <h4>Верификация не пройдена.</h4>
+            {% endif %}
+        <br>
+        <a href="{% url 'main:shop' %}" class="btn_cart">
+                    В каталог
+                </a>
+        </div>
+    </div>
+{% endblock %}

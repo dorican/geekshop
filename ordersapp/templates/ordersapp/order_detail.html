@@ -1,0 +1,60 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+{% load my_tags %}
+
+{% block content-container %}
+    <div class="content-container_on_main">
+        {% include 'ordersapp/includes/inc_order_summary.html' %}
+        <div class="basket_list">
+            {% for item in object.orderitems.select_related %}
+                <div class="basket_record">
+                    {#                <img src="{{ item.product.image|media_folder_products }}" alt="{{ item.product.short_desc }}">#}
+{#                    <img src="/media/{{ item.product.image|default:'users_avatars/default_avatar.png' }}"#}
+{#                         alt="{{ item.product.short_desc }}">#}
+{#                    <span class="category_name">{{ item.product.category.name }}</span>#}
+{#                    <span class="product_name">{{ item.product.name }}</span>#}
+{#                    <span class="product_price">{{ item.product.price }}&nbspруб.</span>#}
+{#                    <span class="product_quantitiy">x {{ item.quantity }} шт.</span>#}
+{#                    <span class="product_cost"> = {{ item.get_product_cost }}&nbspруб.</span>#}
+                    <div class="row">
+                        <div class="col-md-2 img_box">
+                            <p><strong>Изображение</strong></p>
+                        </div>
+                        <div class="col-md-5"><span class="category_name"></span>
+                            <p><strong>Название</strong></p>
+                        </div>
+                        <div class="col-md-1 img_box">
+                        <p ><strong>Цена</strong></p>
+                        </div>
+                        <div class="col-md-1">
+                        <p><strong>Кол-во</strong></p>
+                        </div>
+                        <div class="col-md-2 img_box">
+                        <span class="product_cost"> <strong>Стоимость</strong></span>
+                        </div>
+                    </div>
+                    <div class="row order_table">
+                        <div class="col-md-2 img_box">
+                            <img src="/media/{{ item.product.image|default:'users_avatars/default_avatar.png' }}"
+                                 alt="{{ item.product.short_desc }}" class="order_img">
+                        </div>
+                        <div class="col-md-5"><p>{{ item.product.category.name }}</p>
+                            <span class="product_name">{{ item.product.name }}</span>
+                        </div>
+                        <div class="col-md-1 img_box">
+                        <p>{{ item.product.price }}&nbspруб.</p>
+                        </div>
+                        <div class="col-md-1">
+                        <p>x {{ item.quantity }} шт.</p>
+                        </div>
+                        <div class="col-md-2 img_box">
+                        <p> = {{ item.get_product_cost }}&nbspруб.</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% include 'ordersapp/includes/inc_order_actions.html' %}
+    </div>
+{% endblock %}

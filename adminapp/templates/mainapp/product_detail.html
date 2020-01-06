@@ -1,0 +1,100 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content-container %}
+    <div class="content-container">
+
+        <h2 class="myadmin-title">Панель администратора</h2>
+        {% include 'adminapp/includes/inc__myadmin-menu.html' %}
+
+        {#        <h1 class="regisration_title">{{ productcategory.name }}</h1>#}
+        <h1 class="myadmin-title">{{ object.category.name }}</h1>
+
+{#        <div class="user_list_wrapper">#}
+{##}
+{#            <div class="user_list first-row">#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col">#}
+{##}
+{#                </div>#}
+{#                <div class="div-col">#}
+{#                </div>#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col"></div>#}
+{#                <div class="div-col"></div>#}
+{#            </div>#}
+{##}
+{#            <div class="user_list ">#}
+{##}
+{#                <div class="div-col">#}
+{#                    <img src="/media/{{ object.image|default:'product_images/2n.jpg' }}" alt="">#}
+{##}
+{#                </div>#}
+{#                <div class="div-col">#}
+{#                    <p class="text-admin">{{ object.name }}</p>#}
+{#                </div>#}
+{#                <div class="div-col">#}
+{#                    <p class="text-admin">{{ object.short_desc }}</p>#}
+{#                </div>#}
+{#                <div class="div-col">#}
+{#                    <p class="text-admin">{{ object.description }}</p>#}
+{#                </div>#}
+{#                <div class="div-col">#}
+{#                    <p class="text-admin">{{ object.price }}</p>#}
+{#                </div>#}
+{#                <div class="div-col">#}
+{#                    <p>{{ object.quantity }}</p>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#        <a href="{% url 'myadmin:productcategory_products' object.category.pk %}" class="btn-admin-3">#}
+{#            Назад к товарам#}
+{#        </a>#}
+
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Картинка товара</th>
+                <th scope="col">Название товара</th>
+                <th scope="col">Краткое описание товара</th>
+                <th scope="col">Цена</th>
+                <th scope="col">На складе</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <img src="/media/{{ object.image|default:'product_images/2n.jpg' }}"
+                         class="myadmin_img" alt="">
+                </th>
+                <td>{{ object.name }}</td>
+                <td>
+                    {{ object.short_desc }}
+                </td>
+                <td><strong>{{ object.price }} руб.</strong>
+                </td>
+                <td><strong>{{ object.quantity }}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Полное описание товара</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ object.description }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'myadmin:productcategory_products' object.category.pk %}" class="btn btn-secondary">
+            Назад к товарам
+        </a>
+    </div>
+{% endblock %}

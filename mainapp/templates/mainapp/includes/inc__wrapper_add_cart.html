@@ -1,0 +1,14 @@
+{% if basket %}
+    <div class="wrapper_add_cart">
+        <p class="wrapper_add_cart_text">Итого в корзине товаров:
+            <b>{{ basket.0.total_quantity }}</b>
+            на сумму <b>{{ basket.0.total_cost|floatformat:2 }}</b> руб.
+        </p>
+    </div>
+{% else %}
+    <div class="wrapper_add_cart">
+        <p class="wrapper_add_cart_text">Итого в корзине товаров:
+            <b>0</b> на сумму <b>0</b> руб.
+        </p>
+    </div>
+{% endif %}

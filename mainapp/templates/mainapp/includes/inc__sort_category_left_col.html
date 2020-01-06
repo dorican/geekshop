@@ -1,0 +1,36 @@
+{% load static %}
+
+<ul class="sort-category-left-col">
+    {% for item in products_menu %}
+        <li class="row-sort-category-left-col">
+        <a href="{% url 'main:category' item.slug %}" class="link-sort-category-left-col">
+            {{ item.name }}
+        </a>
+    {% endfor %}
+{#    <ul class="sort-subcategory-left-col">#}
+{#        #}
+{#        <li class="row-sort-subcategory-left-col">#}
+{##}
+{#            <a href="#" class="link-sort-subcategory-left-col">#}
+{#                Огнетушители#}
+{#            </a>#}
+{##}
+{#        </li>#}
+{##}
+{#        <li class="row-sort-subcategory-left-col">#}
+{#            <a href="#" class="link-sort-subcategory-left-col">#}
+{#                Рукава, стволы, запорная арматура#}
+{#            </a>#}
+{#        </li>#}
+{#        <li class="row-sort-subcategory-left-col">#}
+{#            <a href="#" class="link-sort-subcategory-left-col">#}
+{#                Шкафы, щиты, подставки, инвентарь#}
+{#            </a>#}
+{#        </li>#}
+{#    </ul>#}
+{#    </li>#}
+{#    <li class="row-sort-category-left-col"><a href="#" class="link-sort-category-left-col">Продукция#}
+{#        торговой марки Шанс</a></li>#}
+{#    <li class="row-sort-category-left-col"><a href="#" class="link-sort-category-left-col">Средства#}
+{#        индивидуальной защиты</a></li>#}
+</ul>

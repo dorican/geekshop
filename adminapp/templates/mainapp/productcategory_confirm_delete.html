@@ -1,0 +1,28 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+
+{% block content-container %}
+    <div class="content-container">
+    <h2 class="registration_title__myadmin">Панель администратора</h2>
+        {% include 'adminapp/includes/inc__myadmin-menu.html' %}
+        <div class="form_wrapper">
+            <div class="login_form">
+                <h1 class="regisration_title">{{ page_title | title }}</h1>
+
+                <p>Уверены, что хотите удалить категорию
+                <strong>{{ object.name }}</strong>?
+                </p>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-danger" value="Удалить">
+                </form>
+
+            </div>
+            <a href="{% url 'myadmin:productcategory_list' %}" class="btn btn-secondary">
+                    Отмена
+                </a>
+        </div>
+    </div>
+{% endblock %}
